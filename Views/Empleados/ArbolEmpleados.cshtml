@@ -1,0 +1,14 @@
+﻿@model List<EXAMEN.Models.Empleado>
+
+@{
+    ViewData["Title"] = "ArbolEmpleados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Arbol de empleados</h4>
+
+<div>
+    <div class="row">
+        @await Html.PartialAsync("_EmpleadosPartial", Model)
+    </div>
+</div>

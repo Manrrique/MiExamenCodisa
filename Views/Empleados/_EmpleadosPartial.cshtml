@@ -1,0 +1,18 @@
+﻿@model List<EXAMEN.Models.Empleado>
+
+<ul>
+    @foreach (var item in Model)
+    {
+    <li>
+        @if (item.InverseIdJefeNavigation.Count > 0)
+        {
+            <a asp-controller="Empleado_Habilidad" asp-action="Index" asp-route-id="@item.IdEmpleado">@item.NombreCompleto</a>
+            @await Html.PartialAsync("_EmpleadosPartial", item.InverseIdJefeNavigation.ToList())
+        }
+        else
+        {
+            <a asp-controller="Empleado_Habilidad" asp-action="Index" asp-route-id="@item.IdEmpleado">@item.NombreCompleto</a>
+        }
+    </li>
+    }
+</ul>

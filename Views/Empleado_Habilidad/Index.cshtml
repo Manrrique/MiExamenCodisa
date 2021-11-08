@@ -1,0 +1,38 @@
+﻿@model IEnumerable<EXAMEN.Models.Empleado_Habilidad>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Habilidades de @ViewBag.IdEmpleado.NombreCompleto</h4>
+
+<p>
+    <a asp-action="Create" asp-route-id="@ViewBag.IdEmpleado.IdEmpleado">Agregar Habilidad</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Habilidad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreHabilidad)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdHabilidad">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdHabilidad">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="ArbolEmpleados" asp-controller="Empleados">Volver al arbol de Empleados</a>

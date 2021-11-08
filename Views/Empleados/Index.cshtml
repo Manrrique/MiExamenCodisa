@@ -1,0 +1,92 @@
+﻿@model IEnumerable<EXAMEN.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Empleados</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuevo Empleado</a>
+</p>
+<br />
+<div class="form-group">
+    <form asp-action="Index">
+        <label class="control-label">Seleccionar Area</label>
+        <select name="idArea" class="form-control d-inline-block w-50" asp-items="ViewBag.IdArea">
+            @*<option value="0">-- Mostrar Todos --</option>*@
+        </select>
+        <input type="submit" class="btn btn-outline-primary" value="Buscar" />
+    </form>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                Area
+            </th>
+            <th>
+                Jefe
+            </th>
+            <th>
+                Accion
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+                </td>
+                <td>
+                    <img width="40" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Foto)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAreaNavigation.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdJefeNavigation.NombreCompleto)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdEmpleado">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEmpleado">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
